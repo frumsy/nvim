@@ -185,21 +185,24 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {
-    toggler = {
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      toggler = {
         ---Line-comment toggle keymap
         line = '<C-_>',
         ---Block-comment toggle keymap
         block = 'gbc',
-    },
-    ---LHS of operator-pending mappings in NORMAL and VISUAL mode
-    opleader = {
+      },
+      ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+      opleader = {
         ---Line-comment keymap
         line = '<C-_>',
         ---Block-comment keymap
         block = 'gb',
+      }
     }
-  } },
+  },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -290,18 +293,18 @@ vim.o.termguicolors = true
 -- [[ Basic Keymaps ]]
 
 -- [[vscode like keymaps]]
-local main_modes = {'n','i','v'}
-vim.keymap.set(main_modes,'<C-c>', '"+y', {noremap = true, silent = true})
+local main_modes = { 'n', 'i', 'v' }
+vim.keymap.set(main_modes, '<C-c>', '"+y', { noremap = true, silent = true })
 
 -- add vscode like telescope
-vim.keymap.set({'i', 'n', 'v'}, '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set({ 'i', 'n', 'v' }, '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 
 -- select all:
-vim.keymap.set({'i', 'n'}, '<C-a>', function() vim.cmd("normal! ggVG") end, {noremap = true, silent = true})
-vim.keymap.set('v', '<C-a>', '<escape>ggVG', {noremap = true, silent = true})
+vim.keymap.set({ 'i', 'n' }, '<C-a>', function() vim.cmd("normal! ggVG") end, { noremap = true, silent = true })
+vim.keymap.set('v', '<C-a>', '<escape>ggVG', { noremap = true, silent = true })
 
-vim.keymap.set(main_modes, '<C-\\>', ':vsplit<CR>', {noremap = true, silent = true})
-vim.keymap.set({'n','v'}, '<C-s>', ":w<CR>", { noremap = true })
+vim.keymap.set(main_modes, '<C-\\>', ':vsplit<CR>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-s>', ":w<CR>", { noremap = true })
 vim.keymap.set('i', '<C-s>', "<escape>:w<CR>a", { noremap = true })
 
 -- delete cuts to a register
@@ -390,7 +393,7 @@ local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
     require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
+      search_dirs = { git_root },
     })
   end
 end
