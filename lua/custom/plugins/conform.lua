@@ -10,6 +10,7 @@ return {
       lua = { 'stylua' },
       python = { 'isort', 'black' },
       javascript = { 'prettier' },
+      typescript = { 'prettier' },
       html = { 'prettier' },
     },
     -- Set up format-on-save
