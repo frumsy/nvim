@@ -90,7 +90,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       opts = {} },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -126,7 +126,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',   opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -203,7 +203,7 @@ require('lazy').setup({
   },
 
   {
-    "ellisonleao/gruvbox.nvim",
+    'ellisonleao/gruvbox.nvim',
     priority = 1000,
     lazy = false,
     config = function()
@@ -250,8 +250,8 @@ require('lazy').setup({
         line = '<C-_>',
         ---Block-comment keymap
         block = 'gb',
-      }
-    }
+      },
+    },
   },
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -311,7 +311,6 @@ vim.wo.number = true
 --put both relative and normal lune numbers:
 vim.wo.relativenumber = true
 
-
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -345,6 +344,7 @@ vim.o.termguicolors = true
 
 -- [[ Basic Keymaps ]]
 
+-- zzz
 -- [[vscode like keymaps]]
 local main_modes = { 'n', 'i', 'v' }
 vim.keymap.set(main_modes, '<C-c>', '"+y', { noremap = true, silent = true })
@@ -361,15 +361,29 @@ vim.keymap.set({ 'i', 'n', 'v' }, '<C-p>', require('telescope.builtin').find_fil
 --TODO: fix this
 -- vim.keymap.set('i', '<C-<CR>>', '<esc>o', { noremap = true, silent = true })
 
+-- key binding for ctrl+ ijkl in
+-- insert mode to map to ctrl + arrow keys
+vim.keymap.set({ 'i', 'n' }, '<C-h>', '<C-left>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-j>', '<down>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-k>', '<up>', { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-l>', '<C-right>', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<C-S-h>', 'v-<left>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-S-l>', 'v-<right>', { noremap = true, silent = true })
+-- <C-S-h> v
+
 -- select all:
-vim.keymap.set({ 'i', 'n' }, '<C-a>', function() vim.cmd("normal! ggVG") end, { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-a>', function()
+  vim.cmd 'normal! ggVG'
+end, { noremap = true, silent = true })
 vim.keymap.set('v', '<C-a>', '<escape>ggVG', { noremap = true, silent = true })
 
-vim.keymap.set(main_modes, '<C-\\>', ':vsplit<CR>', { noremap = true, silent = true })
-vim.keymap.set({ 'n', 'v' }, '<C-s>', ":w<CR>", { noremap = true })
-vim.keymap.set('i', '<C-s>', "<escape>:w<CR>a", { noremap = true })
+vim.keymap.set('n', '<C-\\>', ':vsplit<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('i', '<C-\\>', ':vsplit<CR>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<C-s>', ':w<CR>', { noremap = true })
+vim.keymap.set('i', '<C-s>', '<escape>:w<CR>a', { noremap = true })
 
-vim.keymap.set('i', '<C-_>', require("Comment.api").toggle.linewise.current, { noremap = true, silent = true })
+vim.keymap.set('i', '<C-_>', require('Comment.api').toggle.linewise.current, { noremap = true, silent = true })
 
 -- delete cuts to a register
 vim.api.nvim_set_keymap('n', 'd', '"ad', { noremap = true })
@@ -394,7 +408,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- add accept copilot suggestion using: ctrl+enter
 vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap("i", '<C-j>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.api.nvim_set_keymap('i', '<Tab>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 -- make ctrl+backspace work in vscode
 -- lhs code is associated with whatever terminal (kitty in my case) sends to neovim
@@ -470,9 +484,9 @@ local function live_grep_git_root()
     require('telescope.builtin').live_grep {
       search_dirs = { git_root },
     }
-    require('telescope.builtin').live_grep({
+    require('telescope.builtin').live_grep {
       search_dirs = { git_root },
-    })
+    }
   end
 end
 

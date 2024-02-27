@@ -14,6 +14,6 @@ return {
     },
   },
   init = function()
-    print 'zz'
+    print 'Reverb loaded!'
   end,
 }
