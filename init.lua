@@ -490,7 +490,7 @@ require('lazy').setup({
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap
-          map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          map('<leader>k', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header
@@ -813,7 +813,7 @@ require('lazy').setup({
 
 -- [[ Additional Configuration ]]
 -- load keymaps/keymaps.lua where you can define your own keymaps
-require 'keymaps/keymaps'
+require 'custom/keymaps'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
