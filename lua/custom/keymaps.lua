@@ -18,6 +18,7 @@ vim.keymap.set('i', '<C-\\>', '<escape>:vsplit<CR>', { noremap = true, silent = 
 
 --save file
 vim.keymap.set({ 'n', 'v' }, '<C-s>', ':w<CR>', { noremap = true })
+
 vim.keymap.set('i', '<C-s>', '<escape>:w<CR>a', { noremap = true })
 
 -- delete cuts to 'a' register
@@ -59,6 +60,33 @@ vim.keymap.set('n', '<S-j>', 'vj', { noremap = true, silent = true })
 vim.keymap.set('v', '<S-j>', 'j', { noremap = true, silent = true })
 vim.keymap.set('n', 'K', 'vk', { noremap = true, silent = true })
 vim.keymap.set('v', 'K', 'k', { noremap = true, silent = true })
+
+-- remap shift + h and shift + l to set visual mode if not in it and move leftcol
+vim.keymap.set('n', 'H', 'vh', { noremap = true, silent = true })
+vim.keymap.set('n', 'L', 'vl', { noremap = true, silent = true })
+vim.keymap.set('v', 'H', 'h', { noremap = true, silent = true })
+vim.keymap.set('v', 'L', 'l', { noremap = true, silent = true })
+
+-- remape ctrl + L and ctrl + H to move forward a word and backward a word
+vim.keymap.set('n', '<C-S-h>', 'vb', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-S-l>', 'vw', { noremap = true, silent = true })
+vim.keymap.set('v', '<C-S-l>', 'w', { noremap = true, silent = true })
+vim.keymap.set('v', '<C-S-h>', 'b', { noremap = true, silent = true })
+
+-- Move backward by a word
+vim.keymap.set({ 'v', 'n' }, '<C-l>', 'w', { noremap = true, silent = true })
+vim.keymap.set({ 'v', 'n' }, '<C-h>', 'b', { noremap = true, silent = true })
+
+-- vim.keymap.set('n', '<C-h>', function()
+--   print 'test'
+-- end, { desc = 'Move focus to the left window' })
+-- vim.keymap.set('i', '<C-h>', function()
+--   print 'test insert'
+-- end, { desc = 'Move focus to the left window' })
+
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 --currently not using:
 -- vim.api.nvim_set_keymap('n', 'X', '"_X', { noremap = true })
