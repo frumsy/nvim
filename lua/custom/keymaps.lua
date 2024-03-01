@@ -73,8 +73,10 @@ vim.keymap.set({ 'v', 'n' }, '<C-h>', 'b', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-h>', '<C-left>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-l>', '<C-right>', { noremap = true, silent = true })
 
-vim.keymap.set({ 'i', 'n' }, '<C-S-h>', '<escape>vb', { noremap = true, silent = true })
-vim.keymap.set({ 'i', 'n' }, '<C-S-l>', '<escape>vw', { noremap = true, silent = true })
+vim.keymap.set({ 'n' }, '<C-S-h>', '<escape>vb', { noremap = true, silent = true })
+vim.keymap.set({ 'n' }, '<C-S-l>', '<escape>vw', { noremap = true, silent = true })
+vim.keymap.set({ 'i' }, '<C-S-h>', '<escape>vb', { noremap = true, silent = true })
+vim.keymap.set({ 'i' }, '<C-S-l>', '<escape>lvw', { noremap = true, silent = true })
 vim.keymap.set('v', '<C-S-l>', 'w', { noremap = true, silent = true })
 vim.keymap.set('v', '<C-S-h>', 'b', { noremap = true, silent = true })
 
