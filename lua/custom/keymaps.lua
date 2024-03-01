@@ -68,21 +68,15 @@ vim.keymap.set('v', 'H', 'h', { noremap = true, silent = true })
 vim.keymap.set('v', 'L', 'l', { noremap = true, silent = true })
 
 -- remape ctrl + L and ctrl + H to move forward a word and backward a word
-vim.keymap.set('n', '<C-S-h>', 'vb', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-S-l>', 'vw', { noremap = true, silent = true })
-vim.keymap.set('v', '<C-S-l>', 'w', { noremap = true, silent = true })
-vim.keymap.set('v', '<C-S-h>', 'b', { noremap = true, silent = true })
-
--- Move backward by a word
 vim.keymap.set({ 'v', 'n' }, '<C-l>', 'w', { noremap = true, silent = true })
 vim.keymap.set({ 'v', 'n' }, '<C-h>', 'b', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-h>', '<C-left>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-l>', '<C-right>', { noremap = true, silent = true })
 
--- vim.keymap.set('n', '<C-h>', function()
---   print 'test'
--- end, { desc = 'Move focus to the left window' })
--- vim.keymap.set('i', '<C-h>', function()
---   print 'test insert'
--- end, { desc = 'Move focus to the left window' })
+vim.keymap.set({ 'i', 'n' }, '<C-S-h>', '<escape>vb', { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-S-l>', '<escape>vw', { noremap = true, silent = true })
+vim.keymap.set('v', '<C-S-l>', 'w', { noremap = true, silent = true })
+vim.keymap.set('v', '<C-S-h>', 'b', { noremap = true, silent = true })
 
 -- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 -- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
