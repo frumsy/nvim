@@ -251,6 +251,43 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      current_line_blame = true,
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol',
+        delay = 400,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+      },
+      current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map('n', '<leader>gn', function()
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+        end, { expr = true, desc = 'Go to [N]ext hunk' })
+
+        map('n', '<leader>gp', function()
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
+        end, { expr = true, desc = 'Go to [P]revious hunk' })
+
+        map('n', '<leader>hr', gs.reset_hunk, { desc = 'Reset current hunk' })
+        map('v', '<leader>hr', function()
+          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end)
+        map('n', '<leader>gh', gs.preview_hunk, { desc = 'git hunk show' })
+      end,
     },
   },
 
@@ -724,12 +761,12 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
-    'folke/tokyonight.nvim',
+    'rebelot/kanagawa.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'kanagawa'
 
       -- You can configure highlights by doing something like
       vim.cmd.hi 'Comment gui=none'
