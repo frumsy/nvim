@@ -378,10 +378,27 @@ require('lazy').setup({
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+
+      -- TODO: fix multiple telescope setup
+      -- local find_from_clipboard = function()
+      --   local clipboard_text = vim.fn.getreg('+'):gsub('\n', '\\n')
+      --   require('telescope.builtin').current_buffer_fuzzy_find { default_text = clipboard_text }
+      -- end
+
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        --
+        -- defaults = {
+        --   mappings = {
+        --     n = {
+        --       ['p'] = find_from_clipboard(),
+        --     },
+        --     i = {
+        --       ['<C-S-v>'] = find_from_clipboard,
+        --     },
+        --   },
+        -- },
+
         -- defaults = {
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
