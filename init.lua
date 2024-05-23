@@ -208,6 +208,14 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+local multiline_live_grep = function()
+  require('telescope.builtin').live_grep {
+    additional_args = function()
+      return { '--multiline' }
+    end,
+  }
+end
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -380,31 +388,22 @@ require('lazy').setup({
       -- See `:help telescope` and `:help telescope.setup()`
 
       -- TODO: fix multiple telescope setup
-      -- local find_from_clipboard = function()
-      --   local clipboard_text = vim.fn.getreg('+'):gsub('\n', '\\n')
-      --   require('telescope.builtin').current_buffer_fuzzy_find { default_text = clipboard_text }
-      -- end
+      local action_state = require 'telescope.actions.state'
 
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
-        -- defaults = {
-        --   mappings = {
-        --     n = {
-        --       ['p'] = find_from_clipboard(),
-        --     },
-        --     i = {
-        --       ['<C-S-v>'] = find_from_clipboard,
-        --     },
-        --   },
-        -- },
-
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
-        -- pickers = {}
+        defaults = {
+          mappings = {
+            n = {
+              ['p'] = function(prompt_bufnr)
+                local current_picker = action_state.get_current_picker(prompt_bufnr)
+                local text = vim.fn.getreg('+'):gsub('\n', '\\n') -- which register depends on clipboard option
+                current_picker:set_prompt(text, false)
+              end,
+            },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -423,7 +422,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sg', multiline_live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
@@ -675,7 +674,7 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = { { 'prettier' } },
+        javascript = { 'prettier' },
       },
     },
   },
